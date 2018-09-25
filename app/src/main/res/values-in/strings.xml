@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Movie</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Auzan Assidqi</string>
+    <string name="nav_header_subtitle">auzanassidqi@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="now_playing">SEDANG MAIN</string>
+    <string name="upcoming">MENDATANG</string>
+    <string name="detail">Detail</string>
+    <string name="share">Bagi</string>
+    <string name="home">Rumah</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vote_average">Rating</string>
+    <string name="overview">Ulasan</string>
+    <string name="title">Judul</string>
+    <string name="release_year">Tanggal Rilis</string>
+    <string name="search">Cari</string>
+    <string name="language">Bahasa</string>
+    <string name="movie_title">Judul Film</string>
+</resources>
