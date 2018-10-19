@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.R;
 
 import static com.example.auzan.cataloguemovieuiux.BuildConfig.API_KEY;
@@ -71,7 +72,9 @@ public class HomeFragment extends Fragment {
     private class sliderAdapter extends FragmentPagerAdapter {
         String now_playing = getResources().getString(R.string.now_playing);
         String upcoming = getResources().getString(R.string.upcoming);
-        final String tabs[] = {now_playing, upcoming};
+        String favorite = getResources().getString(R.string.favorite);
+
+        final String tabs[] = {now_playing, upcoming, favorite};
 
         public sliderAdapter(FragmentManager fm) {
             super(fm);
@@ -84,6 +87,8 @@ public class HomeFragment extends Fragment {
                     return new NowPlayingFragment();
                 case 1:
                     return new UpcomingFragment();
+                case 2:
+                    return new FavoriteFragment();
             }
             return null;
         }

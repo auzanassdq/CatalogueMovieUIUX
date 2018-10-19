@@ -37,7 +37,6 @@ import static com.example.auzan.cataloguemovieuiux.BuildConfig.MOVIE_URL;
 public class NowPlayingFragment extends Fragment {
 
     private RecyclerView rvCategory;
-    private RecyclerView.Adapter adapter;
     private ArrayList<MovieItem> movieLists;
     private View view;
 
@@ -79,32 +78,25 @@ public class NowPlayingFragment extends Fragment {
                 try {
 
                     JSONObject jsonObject = new JSONObject(response);
-
                     JSONArray array = jsonObject.getJSONArray("results");
                     for (int i = 0; i < array.length(); i++){
-                        MovieItem movies = new MovieItem(jsonObject);
 
-                        JSONObject data = array.getJSONObject(i);
-                        movies.setTitle(data.getString("title"));
-                        movies.setOverview(data.getString("overview"));
-                        movies.setReleaseDate(data.getString("release_date"));
-                        movies.setUrlGambar(data.getString("poster_path"));
-                        movies.setBackdrop(data.getString("backdrop_path"));
-                        movies.setVoteAverage(data.getString("vote_average"));
+                        JSONObject movie = array.getJSONObject(i);
+                        MovieItem movies = new MovieItem(movie);
+                        movies.setReleaseDate(movie.getString("release_date"));
                         movieLists.add(movies);
 
                     }
-
                     showRecyclerCardView();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 Toast.makeText(getActivity(), "Error" + error.toString(), Toast.LENGTH_SHORT).show();
                 loadUrlData();
 
@@ -115,23 +107,10 @@ public class NowPlayingFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void showSelectedMovie(MovieItem movieItem) {
-        Intent intent = new Intent(getContext(), DetailMovieActivity.class);
-        intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movieItem);
-        startActivity(intent);
-    }
-
     private void showRecyclerCardView() {
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity()));
         CardMovieAdapter cardAdapter = new CardMovieAdapter(getActivity());
         cardAdapter.setListMovie(movieLists);
         rvCategory.setAdapter(cardAdapter);
-
-        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                showSelectedMovie(movieLists.get(position));
-            }
-        });
     }
 }

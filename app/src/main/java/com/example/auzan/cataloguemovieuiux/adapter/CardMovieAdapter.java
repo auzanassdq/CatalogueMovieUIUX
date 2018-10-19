@@ -2,6 +2,7 @@ package com.example.auzan.cataloguemovieuiux.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +40,6 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
         this.movieLists = movieLists;
     }
 
-    private ArrayList<MovieItem> getListMovie() {
-        return movieLists;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // this method will be called whenever our ViewHolder is created
@@ -59,8 +56,8 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
 
         holder.title.setText(movList.getTitle());
         holder.overview.setText(movList.getOverview());
-
         holder.date.setText(movList.getReleaseDate());
+
         String release_date = movList.getReleaseDate();
         SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -69,14 +66,9 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
             SimpleDateFormat new_date_format = new SimpleDateFormat("E, MMM dd, yyyy");
             String date_of_release = new_date_format.format(date);
             holder.date.setText(date_of_release);
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-//        Glide.with(context)
-//                .load("http://image.tmdb.org/t/p/w500/"+movList.getUrlGambar())
-//                .into(holder.poster);
 
         Picasso.get()
                 .load("http://image.tmdb.org/t/p/w500/"+movList.getUrlGambar())
@@ -103,16 +95,15 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
 
     @Override
     public int getItemCount() {
-        return getListMovie().size();
+        if (movieLists == null) return 0;
+        return movieLists.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
-
         // deklarasi View objects
         public TextView title, overview, date;
         public ImageView poster;
         public Button btnDetail, btnShare;
-        public LinearLayout cvDetail; //cv = cardview
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -124,7 +115,7 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
             date        = (TextView) itemView.findViewById(R.id.tv_release_date);
             btnDetail = (Button) itemView.findViewById(R.id.btn_detail);
             btnShare    = (Button) itemView.findViewById(R.id.btn_set_share);
-//            cvDetail    = (LinearLayout) itemView.findViewById(R.id.cv_movie);
+
         }
 
     }

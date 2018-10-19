@@ -21,4 +21,5 @@
     <string name="search">Search</string>
     <string name="language">Language</string>
     <string name="movie_title">Movie Title</string>
+    <string name="favorite">Favorite</string>
 </resources>

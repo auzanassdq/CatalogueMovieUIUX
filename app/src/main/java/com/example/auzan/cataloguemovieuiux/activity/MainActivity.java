@@ -13,10 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
+import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.fragment.HomeFragment;
 import com.example.auzan.cataloguemovieuiux.R;
+import com.example.auzan.cataloguemovieuiux.fragment.NowPlayingFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,6 +102,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_favorite) {
+            setFragment(new FavoriteFragment(), getResources().getString(R.string.favorite));
+            Toast.makeText(getApplicationContext(), "Show Favorite Movies", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_setting) {
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);

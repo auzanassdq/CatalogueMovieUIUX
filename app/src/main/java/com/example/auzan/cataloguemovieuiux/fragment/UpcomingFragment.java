@@ -36,7 +36,6 @@ import static com.example.auzan.cataloguemovieuiux.BuildConfig.MOVIE_URL;
 public class UpcomingFragment extends Fragment {
 
     private RecyclerView rvCategory;
-    private RecyclerView.Adapter adapter;
     private View view;
     private ArrayList<MovieItem> movieLists;
 
@@ -80,15 +79,9 @@ public class UpcomingFragment extends Fragment {
                     JSONArray array = jsonObject.getJSONArray("results");
                     for (int i = 0; i < array.length(); i++){
 
-                        MovieItem movies = new MovieItem(jsonObject);
-
-                        JSONObject data = array.getJSONObject(i);
-                        movies.setTitle(data.getString("title"));
-                        movies.setOverview(data.getString("overview"));
-                        movies.setReleaseDate(data.getString("release_date"));
-                        movies.setUrlGambar(data.getString("poster_path"));
-                        movies.setBackdrop(data.getString("backdrop_path"));
-                        movies.setVoteAverage(data.getString("vote_average"));
+                        JSONObject movie = array.getJSONObject(i);
+                        MovieItem movies = new MovieItem(movie);
+                        movies.setReleaseDate(movie.getString("release_date"));
                         movieLists.add(movies);
 
                     }
@@ -125,12 +118,5 @@ public class UpcomingFragment extends Fragment {
         CardMovieAdapter cardAdapter = new CardMovieAdapter(getActivity());
         cardAdapter.setListMovie(movieLists);
         rvCategory.setAdapter(cardAdapter);
-
-        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                showSelectedMovie(movieLists.get(position));
-            }
-        });
     }
 }
