@@ -36,14 +36,10 @@ import static com.example.auzan.cataloguemovieuiux.BuildConfig.MOVIE_URL_SEARCH;
 public class SearchActivity extends AppCompatActivity {
 
     private EditText edtSearch;
-    private ImageButton btnClear;
-    private Button btnSearch;
 
     private RecyclerView rvCategory;
-    private RecyclerView.Adapter adapter;
     private ArrayList<MovieItem> movieLists;
-    private Context context;
-    private View view;
+
 
     private String API_URL =  MOVIE_URL_SEARCH + "?api_key=" + API_KEY + "&language=en-US&query=";
 
@@ -52,11 +48,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        edtSearch = (EditText)findViewById(R.id.edt_search);
-        btnClear = (ImageButton)findViewById(R.id.btn_clear);
-        btnSearch = (Button) findViewById(R.id.btn_search);
+        edtSearch = findViewById(R.id.edt_search);
+        ImageButton btnClear = findViewById(R.id.btn_clear);
+        Button btnSearch = findViewById(R.id.btn_search);
 
-        rvCategory = (RecyclerView)findViewById(R.id.rv_category);
+        rvCategory = findViewById(R.id.rv_category);
         rvCategory.setHasFixedSize(true);
         rvCategory.setLayoutManager(new LinearLayoutManager(this));
         movieLists = new ArrayList<>();
@@ -109,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(context, "Error" + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error" + error.toString(), Toast.LENGTH_SHORT).show();
                 loadUrlData();
 
             }
