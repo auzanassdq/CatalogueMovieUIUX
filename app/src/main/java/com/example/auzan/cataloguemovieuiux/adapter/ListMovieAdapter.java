@@ -60,14 +60,13 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.Cate
         TextView tvTitle, tvOverview;
         ImageView imgPoster;
         RecyclerView rvList;
-        LinearLayout view_container;
 
         CategoryViewHolder(View itemView) {
             super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvOverview = (TextView) itemView.findViewById(R.id.tv_overview);
-            imgPoster = (ImageView) itemView.findViewById(R.id.img_poster);
-            rvList = (RecyclerView) itemView.findViewById(R.id.rv_category);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvOverview = itemView.findViewById(R.id.tv_overview);
+            imgPoster = itemView.findViewById(R.id.img_poster);
+            rvList = itemView.findViewById(R.id.rv_category);
         }
     }
 }

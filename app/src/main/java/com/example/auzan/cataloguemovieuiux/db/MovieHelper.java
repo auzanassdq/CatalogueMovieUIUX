@@ -42,23 +42,6 @@ public class MovieHelper {
         databaseHelper.close();
     }
 
-    public long insert(MovieItem movieItem) {
-        ContentValues values = new ContentValues();
-
-//        values.put(_ID, movieItem.getId());
-        values.put(TITLE, movieItem.getTitle());
-        values.put(OVERVIEW, movieItem.getOverview());
-        values.put(RELEASE, movieItem.getReleaseDate());
-        values.put(RATING, movieItem.getVoteAverage());
-        values.put(POSTER, movieItem.getUrlGambar());
-        values.put(BACKDROP, movieItem.getBackdrop());
-        return database.insert(DATABASE_TABLE, null, values);
-    }
-
-    public int delete(int id){
-        return database.delete(TABLE_MOVIE, _ID + " = '"+id+"'", null);
-    }
-
     public Cursor queryByIdProvider(String id) {
         return database.query(DATABASE_TABLE
                 ,null

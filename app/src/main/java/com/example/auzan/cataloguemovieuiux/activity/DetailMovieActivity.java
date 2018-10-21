@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.provider.BaseColumns._ID;
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.IMG_W185_URL;
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.IMG_W500_URL;
 import static com.example.auzan.cataloguemovieuiux.db.DatabaseContract.CONTENT_URI;
 import static com.example.auzan.cataloguemovieuiux.db.DatabaseContract.FavoriteColumns.BACKDROP;
 import static com.example.auzan.cataloguemovieuiux.db.DatabaseContract.FavoriteColumns.OVERVIEW;
@@ -34,28 +36,27 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     final public static String EXTRA_MOVIE = "extra_movie";
 
-    private TextView tvTitle, tvOverview, tvRating, tvReleaseDate;
+    private TextView tvOverview, tvRating, tvReleaseDate;
     private CollapsingToolbarLayout colapseBar;
     private ImageView imgPoster, imgBackdrop;
     private FloatingActionButton fabFavorite;
 
     private MovieItem movieItem;
     private MovieHelper movieHelper;
-    private Boolean isFavorite = false;;
+    private Boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
 
-        tvTitle = (TextView)findViewById(R.id.tv_title);
-        tvOverview = (TextView)findViewById(R.id.tv_overview);
-        tvRating = (TextView)findViewById(R.id.tv_rating);
-        tvReleaseDate = (TextView)findViewById(R.id.tv_release_date);
-        imgPoster = (ImageView)findViewById(R.id.img_poster);
-        imgBackdrop = (ImageView) findViewById(R.id.img_backdrop);
-        fabFavorite = (FloatingActionButton) findViewById(R.id.fv_favorite);
-        colapseBar = (CollapsingToolbarLayout) findViewById(R.id.colappsingtoolbar);
+        tvOverview = findViewById(R.id.tv_overview);
+        tvRating = findViewById(R.id.tv_rating);
+        tvReleaseDate = findViewById(R.id.tv_release_date);
+        imgPoster = findViewById(R.id.img_poster);
+        imgBackdrop = findViewById(R.id.img_backdrop);
+        fabFavorite = findViewById(R.id.fv_favorite);
+        colapseBar = findViewById(R.id.colappsingtoolbar);
 
         movieItem = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
@@ -137,11 +138,11 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     private void getImage(MovieItem movieItem){
         if (movieItem.getUrlGambar() != null){
-            String urlPoster = "https://image.tmdb.org/t/p/w92/"+movieItem.getUrlGambar();
+            String urlPoster = IMG_W185_URL + movieItem.getUrlGambar();
             Picasso.get().load(urlPoster).into(imgPoster);
         }
         if (movieItem.getUrlGambar() != null){
-            String urlBackdrop = "https://image.tmdb.org/t/p/w300/"+movieItem.getBackdrop();
+            String urlBackdrop = IMG_W500_URL + movieItem.getBackdrop();
             Picasso.get().load(urlBackdrop).into(imgBackdrop);
         }
     }

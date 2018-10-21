@@ -19,6 +19,11 @@ android {
             it.buildConfigField 'String', 'API_KEY', API_KEY
             it.buildConfigField 'String', 'MOVIE_URL', MOVIE_URL
             it.buildConfigField 'String', 'MOVIE_URL_SEARCH', MOVIE_URL_SEARCH
+            it.buildConfigField 'String', 'NOW_PLAYING_URL', NOW_PLAYING_URL
+            it.buildConfigField 'String', 'UP_COMING_URL', UP_COMING_URL
+            it.buildConfigField 'String', 'EN_LANG_URL', EN_LANG_URL
+            it.buildConfigField 'String', 'IMG_W185_URL', IMG_W185_URL
+            it.buildConfigField 'String', 'IMG_W500_URL', IMG_W500_URL
         }
     }
 }

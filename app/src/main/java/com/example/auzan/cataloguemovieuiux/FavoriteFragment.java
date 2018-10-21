@@ -2,7 +2,6 @@ package com.example.auzan.cataloguemovieuiux;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -36,7 +35,7 @@ public class FavoriteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
         context = view.getContext();
-        rvFavorite = (RecyclerView)view.findViewById(R.id.rv_favorite);
+        rvFavorite = view.findViewById(R.id.rv_favorite);
 
         adapter = new FavoriteAdapter(context);
         rvFavorite.setLayoutManager(new LinearLayoutManager(context));

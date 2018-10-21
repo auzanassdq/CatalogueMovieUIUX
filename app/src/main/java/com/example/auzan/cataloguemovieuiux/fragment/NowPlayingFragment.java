@@ -1,7 +1,6 @@
 package com.example.auzan.cataloguemovieuiux.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,9 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.auzan.cataloguemovieuiux.R;
-import com.example.auzan.cataloguemovieuiux.activity.DetailMovieActivity;
 import com.example.auzan.cataloguemovieuiux.adapter.CardMovieAdapter;
-import com.example.auzan.cataloguemovieuiux.listener.ItemClickSupport;
 import com.example.auzan.cataloguemovieuiux.model.MovieItem;
 
 import org.json.JSONArray;
@@ -31,8 +28,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.example.auzan.cataloguemovieuiux.BuildConfig.API_KEY;
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.EN_LANG_URL;
 import static com.example.auzan.cataloguemovieuiux.BuildConfig.MOVIE_URL;
-
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.NOW_PLAYING_URL;
 
 public class NowPlayingFragment extends Fragment {
 
@@ -40,8 +38,7 @@ public class NowPlayingFragment extends Fragment {
     private ArrayList<MovieItem> movieLists;
     private View view;
 
-    private static final String API_URL = MOVIE_URL +"/now_playing?api_key="+ API_KEY +"&language=en-US";
-//    public static final String EXTRA_URL = "extra_url";
+    private static final String API_URL = MOVIE_URL + NOW_PLAYING_URL + API_KEY + EN_LANG_URL;
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -53,7 +50,7 @@ public class NowPlayingFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_now_playing, container,false);
 
-        rvCategory = (RecyclerView)view.findViewById(R.id.rv_list);
+        rvCategory = view.findViewById(R.id.rv_list);
         rvCategory.setHasFixedSize(true);
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity()));
         movieLists = new ArrayList<>();

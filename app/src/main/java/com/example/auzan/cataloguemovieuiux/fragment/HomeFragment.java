@@ -14,18 +14,11 @@ import android.view.ViewGroup;
 import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.R;
 
-import static com.example.auzan.cataloguemovieuiux.BuildConfig.API_KEY;
-import static com.example.auzan.cataloguemovieuiux.BuildConfig.MOVIE_URL;
-
-
 public class HomeFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private View view;
-
-//    private static final String API_URL_NOWPLAYING = MOVIE_URL +"/now_playing?api_key="+ API_KEY +"&language=en-US";
-//    private static final String API_URL_UPCOMING = MOVIE_URL+"/upcoming?api_key="+API_KEY+"&language=en-US";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -38,7 +31,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new sliderAdapter(getChildFragmentManager()));
 
         tabLayout = (TabLayout) view.findViewById(R.id.tab);

@@ -1,21 +1,17 @@
 package com.example.auzan.cataloguemovieuiux.adapter;
 
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.R;
 import com.example.auzan.cataloguemovieuiux.activity.DetailMovieActivity;
 import com.example.auzan.cataloguemovieuiux.listener.CustomOnItemClickListener;
@@ -25,6 +21,8 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.IMG_W185_URL;
 
 /**
  * Created by auzan on 10/15/2018.
@@ -74,7 +72,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
 
         Picasso.get()
-                .load("http://image.tmdb.org/t/p/w500/"+movieItem.getUrlGambar())
+                .load( IMG_W185_URL + movieItem.getUrlGambar())
                 .into(holder.poster);
 
 
@@ -110,11 +108,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, overview, date;
-        public ImageView poster;
-        public Button btnDetail, btnShare;
+        private TextView title, overview, date;
+        private ImageView poster;
+        private Button btnDetail, btnShare;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
 
             title = view.findViewById(R.id.tv_title);

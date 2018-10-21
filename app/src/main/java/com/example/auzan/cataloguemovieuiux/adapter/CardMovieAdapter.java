@@ -2,14 +2,13 @@ package com.example.auzan.cataloguemovieuiux.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+import static com.example.auzan.cataloguemovieuiux.BuildConfig.IMG_W185_URL;
 
 public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.ViewHolder> {
 
@@ -41,7 +40,7 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // this method will be called whenever our ViewHolder is created
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cardview_movie, parent, false);
@@ -49,7 +48,7 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         // this method will bind the data to the ViewHolder from hence it'll be shown to other Views
         final MovieItem movList = movieLists.get(position);
@@ -71,7 +70,7 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
         }
 
         Picasso.get()
-                .load("http://image.tmdb.org/t/p/w500/"+movList.getUrlGambar())
+                .load(IMG_W185_URL + movList.getUrlGambar())
                 .into(holder.poster);
 
 
@@ -99,22 +98,22 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
         return movieLists.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    class ViewHolder extends RecyclerView.ViewHolder  {
         // deklarasi View objects
-        public TextView title, overview, date;
-        public ImageView poster;
-        public Button btnDetail, btnShare;
+        private TextView title, overview, date;
+        private ImageView poster;
+        private Button btnDetail, btnShare;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
 
             // init the View objects
-            title       = (TextView) itemView.findViewById(R.id.tv_title);
-            poster      = (ImageView) itemView.findViewById(R.id.img_poster);
-            overview    = (TextView) itemView.findViewById(R.id.tv_overview);
-            date        = (TextView) itemView.findViewById(R.id.tv_release_date);
-            btnDetail = (Button) itemView.findViewById(R.id.btn_detail);
-            btnShare    = (Button) itemView.findViewById(R.id.btn_set_share);
+            title       = itemView.findViewById(R.id.tv_title);
+            poster      = itemView.findViewById(R.id.img_poster);
+            overview    = itemView.findViewById(R.id.tv_overview);
+            date        = itemView.findViewById(R.id.tv_release_date);
+            btnDetail = itemView.findViewById(R.id.btn_detail);
+            btnShare    = itemView.findViewById(R.id.btn_set_share);
 
         }
 
