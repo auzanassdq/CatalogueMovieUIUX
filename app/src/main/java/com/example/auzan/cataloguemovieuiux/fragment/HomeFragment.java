@@ -1,6 +1,7 @@
 package com.example.auzan.cataloguemovieuiux.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,14 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.R;
 
 public class HomeFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private View view;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -26,15 +25,15 @@ public class HomeFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new sliderAdapter(getChildFragmentManager()));
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tab);
+        tabLayout = view.findViewById(R.id.tab);
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +68,7 @@ public class HomeFragment extends Fragment {
 
         final String tabs[] = {now_playing, upcoming, favorite};
 
-        public sliderAdapter(FragmentManager fm) {
+        private sliderAdapter(FragmentManager fm) {
             super(fm);
         }
 

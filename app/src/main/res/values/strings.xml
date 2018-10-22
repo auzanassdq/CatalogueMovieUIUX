@@ -22,4 +22,8 @@
     <string name="language">Language</string>
     <string name="movie_title">Movie Title</string>
     <string name="favorite">Favorite</string>
+    <string name="tidak_ada_data">Tidak ada data saat ini</string>
+    <string name="appwidget_text">FAVORITE MOVIE</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="add_widget">Add widget</string>
 </resources>

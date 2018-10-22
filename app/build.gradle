@@ -43,6 +43,7 @@ dependencies {
 
     // pemuat gambar
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.github.bumptech.glide:glide:4.8.0"
 
     // Text Rata kiri-kanan
     implementation 'com.codesgood:justifiedtextview:1.0.2'

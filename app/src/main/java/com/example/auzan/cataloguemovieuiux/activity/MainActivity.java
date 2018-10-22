@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import com.example.auzan.cataloguemovieuiux.FavoriteFragment;
+import com.example.auzan.cataloguemovieuiux.fragment.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.fragment.HomeFragment;
 import com.example.auzan.cataloguemovieuiux.R;
 

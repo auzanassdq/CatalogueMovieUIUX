@@ -1,9 +1,10 @@
-package com.example.auzan.cataloguemovieuiux;
+package com.example.auzan.cataloguemovieuiux.fragment;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.auzan.cataloguemovieuiux.R;
 import com.example.auzan.cataloguemovieuiux.adapter.FavoriteAdapter;
 
 import static com.example.auzan.cataloguemovieuiux.db.DatabaseContract.CONTENT_URI;
@@ -21,7 +23,6 @@ public class FavoriteFragment extends Fragment {
     private Context context;
     private RecyclerView rvFavorite;
 
-    private Cursor listFav;
     private FavoriteAdapter adapter;
 
     public FavoriteFragment() {
@@ -29,7 +30,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
@@ -74,11 +75,10 @@ public class FavoriteFragment extends Fragment {
         protected void onPostExecute(Cursor favMovie) {
             super.onPostExecute(favMovie);
 
-            listFav = favMovie;
-            adapter.replaceAll(listFav);
+            adapter.replaceAll(favMovie);
 
-            if (listFav.getCount() == 0){
-                showSnackbarMessage("Tidak ada data saat ini");
+            if (favMovie.getCount() == 0){
+                showSnackbarMessage(getString(R.string.tidak_ada_data));
             }
         }
     }
