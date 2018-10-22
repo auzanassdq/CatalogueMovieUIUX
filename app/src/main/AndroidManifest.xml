@@ -32,7 +32,7 @@
             android:name=".activity.DetailMovieActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
 
         <provider
             android:name=".provider.MovieProvider"

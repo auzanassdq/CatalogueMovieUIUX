@@ -12,7 +12,6 @@
     <string name="share">Bagi</string>
     <string name="home">Rumah</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="vote_average">Rating</string>
     <string name="overview">Ulasan</string>
@@ -21,4 +20,10 @@
     <string name="search">Cari</string>
     <string name="language">Bahasa</string>
     <string name="movie_title">Judul Film</string>
+
+    <string name="favorite">Favorit</string>
+    <string name="no_data">Tidak ada data sekarang</string>
+    <string name="appwidget_text">FILM FAVORIT</string>
+    <string name="empty_text">TIDAK ADA DATA</string>
+    <string name="add_widget">Tambahkan Widget</string>
 </resources>

@@ -39,6 +39,7 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.View
         this.movieLists = movieLists;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // this method will be called whenever our ViewHolder is created

@@ -2,6 +2,7 @@ package com.example.auzan.cataloguemovieuiux.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,7 +37,6 @@ public class NowPlayingFragment extends Fragment {
 
     private RecyclerView rvCategory;
     private ArrayList<MovieItem> movieLists;
-    private View view;
 
     private static final String API_URL = MOVIE_URL + NOW_PLAYING_URL + API_KEY + EN_LANG_URL;
 
@@ -46,9 +46,9 @@ public class NowPlayingFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_now_playing, container,false);
+        View view = inflater.inflate(R.layout.fragment_now_playing, container, false);
 
         rvCategory = view.findViewById(R.id.rv_list);
         rvCategory.setHasFixedSize(true);
