@@ -78,7 +78,7 @@ public class FavoriteFragment extends Fragment {
             adapter.replaceAll(favMovie);
 
             if (favMovie.getCount() == 0){
-                showSnackbarMessage(getString(R.string.tidak_ada_data));
+                showSnackbarMessage(getString(R.string.no_data));
             }
         }
     }
