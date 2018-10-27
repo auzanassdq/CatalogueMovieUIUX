@@ -26,4 +26,16 @@
     <string name="appwidget_text">FAVORITE MOVIE</string>
     <string name="empty_text">NO DATA</string>
     <string name="add_widget">Add widget</string>
+
+    <string name="key_reminder_upcoming">reminder_upcoming</string>
+    <string name="daily_reminder_title">Daily Reminder Notification</string>
+    <string name="daily_reminder_summary">Turn on/off daily reminder</string>
+    <string name="upcoming_reminder_title">Upcoming Reminder Notification</string>
+    <string name="upcoming_reminder_summary">Turn on/off upcoming reminder</string>
+    <string name="notification">Notification</string>
+    <string name="key_setting_locale">setting_locale</string>
+    <string name="setting_locale_title">Setting Locale</string>
+    <string name="setting_locale_summary">Change your phone localization</string>
+    <string name="key_reminder_daily">reminder_daily</string>
+    <string name="setting">Setting</string>
 </resources>
