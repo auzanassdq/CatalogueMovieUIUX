@@ -1,5 +1,6 @@
 package com.example.auzan.cataloguemovieuiux;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -15,6 +16,10 @@ import android.widget.Toast;
 public class MyPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     String reminder_daily, reminder_upcoming, setting_locale;
+    private static final int JOB_ID = 10;
+    Context context;
+
+    private DailyReminderAlarm dailyReminderAlarm = new DailyReminderAlarm();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String rootkey) {
@@ -37,10 +42,12 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Pr
 
         if (key.equals(reminder_daily)) {
             if (isOn) {
-
+                dailyReminderAlarm.setRepeatingAlarm(getActivity());
+            } else {
+                dailyReminderAlarm.cancelAlarm(getActivity());
             }
 
-            Toast.makeText(getActivity(), (isOn ? "active" : "deactive"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), (isOn ? "Daily Reminder Active" : "Daily Reminder Deactive"), Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -49,7 +56,7 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Pr
 
             }
 
-            Toast.makeText(getActivity(), (isOn ? "active" : "deactive"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), (isOn ? "Upcoming Reminder Active" : "Upcoming Reminder Deactive"), Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -68,4 +75,5 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Pr
 
         return false;
     }
+
 }
