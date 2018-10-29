@@ -2,8 +2,7 @@ package com.example.auzan.cataloguemovieuiux.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -17,7 +16,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-import com.example.auzan.cataloguemovieuiux.SettingActivity;
 import com.example.auzan.cataloguemovieuiux.fragment.FavoriteFragment;
 import com.example.auzan.cataloguemovieuiux.fragment.HomeFragment;
 import com.example.auzan.cataloguemovieuiux.R;
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setElevation(0);
 
         drawer = findViewById(R.id.drawer_layout);
 
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

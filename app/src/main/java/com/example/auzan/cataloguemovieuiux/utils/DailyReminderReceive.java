@@ -1,7 +1,6 @@
-package com.example.auzan.cataloguemovieuiux;
+package com.example.auzan.cataloguemovieuiux.utils;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,16 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
+import com.example.auzan.cataloguemovieuiux.R;
 import com.example.auzan.cataloguemovieuiux.activity.MainActivity;
 
 import java.util.Calendar;
 
-public class DailyReminderAlarm extends BroadcastReceiver {
+public class DailyReminderReceive extends BroadcastReceiver {
 
     public static final int NOTIFICATION_ID = 2407;
 
@@ -30,7 +27,6 @@ public class DailyReminderAlarm extends BroadcastReceiver {
     }
 
     public void sendNotification(Context context, String title, String message, int notifId) {
-
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -46,14 +42,15 @@ public class DailyReminderAlarm extends BroadcastReceiver {
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setAutoCancel(true);
 
-        notificationManagerCompat.notify(notifId, notification.build());
-
+        if (notificationManagerCompat != null) {
+            notificationManagerCompat.notify(notifId, notification.build());
+        }
     }
 
     public void setRepeatingAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(context, DailyReminderAlarm.class);
+        Intent intent = new Intent(context, DailyReminderReceive.class);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 7);
@@ -62,33 +59,22 @@ public class DailyReminderAlarm extends BroadcastReceiver {
 
         if (calendar.before(Calendar.getInstance())) calendar.add(Calendar.DATE, 1);
 
-        int requestCode = NOTIFICATION_ID;
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
     public void cancelAlarm(Context context){
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, DailyReminderAlarm.class);
+        Intent intent = new Intent(context, DailyReminderReceive.class);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, 0);
 
-        alarmManager.cancel(pendingIntent);
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
     }
-
-//    private static PendingIntent getPendingIntent(Context context) {
-//        /* get the application context */
-//        Intent alarmIntent = new Intent(context, DailyReminderAlarm.class);
-//
-//        boolean isAlarmOn = (PendingIntent.getBroadcast(context, NOTIFICATION_ID, alarmIntent,
-//                PendingIntent.FLAG_NO_CREATE) != null);
-//
-//        Log.e("isAlarmOn : ", String.valueOf(isAlarmOn));
-//
-//        return PendingIntent.getBroadcast(context, NOTIFICATION_ID, alarmIntent,
-//                PendingIntent.FLAG_CANCEL_CURRENT);
-//    }
 
 }

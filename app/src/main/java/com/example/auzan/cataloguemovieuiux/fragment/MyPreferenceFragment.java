@@ -1,12 +1,15 @@
-package com.example.auzan.cataloguemovieuiux;
+package com.example.auzan.cataloguemovieuiux.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.widget.Toast;
+
+import com.example.auzan.cataloguemovieuiux.R;
+import com.example.auzan.cataloguemovieuiux.utils.DailyReminderReceive;
+import com.example.auzan.cataloguemovieuiux.utils.UpcomingReminderReceive;
 
 
 /**
@@ -16,10 +19,9 @@ import android.widget.Toast;
 public class MyPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     String reminder_daily, reminder_upcoming, setting_locale;
-    private static final int JOB_ID = 10;
-    Context context;
 
-    private DailyReminderAlarm dailyReminderAlarm = new DailyReminderAlarm();
+    private DailyReminderReceive dailyReminderReceive = new DailyReminderReceive();
+    private UpcomingReminderReceive upcomingReminderReceive = new UpcomingReminderReceive();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String rootkey) {
@@ -42,9 +44,9 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Pr
 
         if (key.equals(reminder_daily)) {
             if (isOn) {
-                dailyReminderAlarm.setRepeatingAlarm(getActivity());
+                dailyReminderReceive.setRepeatingAlarm(getActivity());
             } else {
-                dailyReminderAlarm.cancelAlarm(getActivity());
+                dailyReminderReceive.cancelAlarm(getActivity());
             }
 
             Toast.makeText(getActivity(), (isOn ? "Daily Reminder Active" : "Daily Reminder Deactive"), Toast.LENGTH_SHORT).show();
@@ -53,7 +55,9 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Pr
 
         if (key.equals(reminder_upcoming)) {
             if (isOn) {
-
+                upcomingReminderReceive.setReleaseAlarm(getActivity());
+            } else {
+                upcomingReminderReceive.cancelAlarm(getActivity());
             }
 
             Toast.makeText(getActivity(), (isOn ? "Upcoming Reminder Active" : "Upcoming Reminder Deactive"), Toast.LENGTH_SHORT).show();

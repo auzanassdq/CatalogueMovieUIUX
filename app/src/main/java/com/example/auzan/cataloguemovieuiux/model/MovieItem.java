@@ -1,5 +1,6 @@
 package com.example.auzan.cataloguemovieuiux.model;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -29,7 +30,6 @@ public class MovieItem implements Parcelable {
 
     public MovieItem(JSONObject object) {
         try {
-
             int id = object.getInt("id");
             String title = object.getString("original_title");
             String overview = object.getString("overview");
@@ -42,14 +42,8 @@ public class MovieItem implements Parcelable {
             this.title = title;
             this.overview = overview;
             this.releaseDate = releaseDate;
-            this.urlGambar = poster;
             this.voteAverage = voteAverage;
-
-            if (!releaseDate.equals("")){
-                this.releaseDate = releaseDate.substring(0,4);
-            } else{
-                releaseDate = "";
-            }
+            this.urlGambar = poster;
             this.backdrop = background;
 
         } catch (JSONException e) {
