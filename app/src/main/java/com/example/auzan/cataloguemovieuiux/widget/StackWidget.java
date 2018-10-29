@@ -68,11 +68,6 @@ public class StackWidget extends AppWidgetProvider {
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
             Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
-
-
-            Intent Intent = new Intent(context, DetailMovieActivity.class);
-            Intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, EXTRA_ITEM);
-            context.startActivity(Intent);
         }
         super.onReceive(context, intent);
     }
