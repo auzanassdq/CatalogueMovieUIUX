@@ -78,7 +78,7 @@ public class UpcomingReminderReceive extends BroadcastReceiver {
         Intent intent = new Intent(context, UpcomingReminderReceive.class);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 7);
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 

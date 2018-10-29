@@ -32,7 +32,6 @@
             android:name=".activity.DetailMovieActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activity.MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
