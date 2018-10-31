@@ -31,8 +31,27 @@
         <activity
             android:name=".activity.DetailMovieActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activity.SearchActivity" />
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SearchActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="Setting"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
 
         <provider
             android:name=".provider.MovieProvider"
@@ -51,12 +70,22 @@
                 android:resource="@xml/stack_widget_info" />
         </receiver>
 
+        <receiver
+            android:name=".utils.DailyReminderReceive"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+        <receiver
+            android:name=".utils.UpcomingReminderReceive"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+
         <service
             android:name=".widget.StackWidgetService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_REMOTEVIEWS"></service>
-
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
