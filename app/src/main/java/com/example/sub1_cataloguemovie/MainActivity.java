@@ -2,60 +2,53 @@ package com.example.sub1_cataloguemovie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.example.sub1_cataloguemovie.adapter.MovieAdapter;
-import com.example.sub1_cataloguemovie.model.Movie;
-import com.example.sub1_cataloguemovie.model.MovieData;
-
-import java.util.ArrayList;
+import com.example.sub1_cataloguemovie.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
-
-    final String STATE_LIST = "state_list";
-    private ListView listView;
-    private ArrayList<Movie> list;
-    private MovieAdapter adapter;
-    private Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = findViewById(R.id.lv_list);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        list = new ArrayList<>();
-        list.addAll(MovieData.getListData());
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        showListView();
-    }
-
-    private void showListView() {
-        adapter = new MovieAdapter(this);
-        adapter.setMovies(list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
-                movie = list.get(i);
-                Toast.makeText(MainActivity.this, movie.getName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
-                startActivity(intent);
-            }
-        });
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_LIST, list);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_setting) {
+            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MovieFragment(), getResources().getString(R.string.movies));
+        adapter.addFragment(new TvShowFragment(), getResources().getString(R.string.tv_shows));
+        viewPager.setAdapter(adapter);
     }
 
 }

@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Catalogue Movie</string>
-    <string name="genre">Genre</string>
-    <string name="description">Description</string>
+    <string name="overview">Overview</string>
     <string name="year">Year</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">Tv Shows</string>
+
+    <string name="poster">Poster</string>
+    <string name="setting">Setting</string>
 </resources>
