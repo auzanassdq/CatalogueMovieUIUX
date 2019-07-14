@@ -3,66 +3,77 @@ package com.example.sub1_cataloguemovie.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by auzan on 6/29/2019.
  * Github: @auzanassdq
  */
 public class Movie implements Parcelable {
-    private String name, desc, photo, year;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("poster_path")
+    private String poster;
+    @SerializedName("backdrop_path")
+    private String backdrop;
+    @SerializedName("overview")
+    private String overview;
+    @SerializedName("release_date")
+    private String date;
 
     public Movie() {
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
-    public String getYear() {
-        return year;
+    public String getBackdrop() {
+        return backdrop;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
-    private Movie(Parcel in) {
-        this.name = in.readString();
-        this.desc = in.readString();
-        this.photo = in.readString();
-        this.year = in.readString();
+    public String getOverview() {
+        return overview;
     }
 
-    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
 
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 
     @Override
     public int describeContents() {
@@ -71,9 +82,32 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(desc);
-        dest.writeString(photo);
-        dest.writeString(year);
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.poster);
+        dest.writeString(this.backdrop);
+        dest.writeString(this.overview);
+        dest.writeString(this.date);
     }
+
+    private Movie(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.poster = in.readString();
+        this.backdrop = in.readString();
+        this.overview = in.readString();
+        this.date = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }
