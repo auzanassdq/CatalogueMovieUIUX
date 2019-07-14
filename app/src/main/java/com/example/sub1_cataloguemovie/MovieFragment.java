@@ -1,6 +1,5 @@
 package com.example.sub1_cataloguemovie;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,17 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.sub1_cataloguemovie.adapter.MovieAdapter;
-import com.example.sub1_cataloguemovie.listener.ItemClickSupport;
 import com.example.sub1_cataloguemovie.model.Movie;
-import com.example.sub1_cataloguemovie.model.MovieData;
+import com.example.sub1_cataloguemovie.model.MovieList;
+import com.example.sub1_cataloguemovie.network.GetDataService;
+import com.example.sub1_cataloguemovie.network.RetrofitClientInstance;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MovieFragment extends Fragment {
 
     private RecyclerView rvCategory;
-    private ArrayList<Movie> list;
-    private Movie movie;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -38,30 +40,40 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
-
-        rvCategory = view.findViewById(R.id.rv_list);
-        list = new ArrayList<>();
-        list.addAll(MovieData.getListDataMovie());
-        showListView();
-
+        initViews(view);
         return view;
     }
 
-    private void showListView() {
+    private void initViews(View view) {
+        rvCategory = view.findViewById(R.id.rv_list);
+        rvCategory.setHasFixedSize(true);
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MovieAdapter adapter = new MovieAdapter(getActivity());
-        adapter.setListMovie(list);
-        rvCategory.setAdapter(adapter);
+        loadJSON();
+    }
 
-        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+    private void loadJSON() {
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<MovieList> call = service.getAllMovie(BuildConfig.MOVIE_API, "en-US");
+        call.enqueue(new Callback<MovieList>() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                movie = list.get(position);
-                Toast.makeText(getActivity(), movie.getName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
-                startActivity(intent);
+            public void onResponse(@NonNull Call<MovieList> call, @NonNull Response<MovieList> response) {
+                if (response.body() != null) {
+                    generateMovieList(response.body().getResults());
+                } else {
+                    Toast.makeText(getContext(), "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MovieList> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Tidak dapat memuat data", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void generateMovieList(final ArrayList<Movie> movies) {
+        MovieAdapter adapter = new MovieAdapter(getContext());
+        adapter.setListMovie(movies);
+        rvCategory.setAdapter(adapter);
     }
 }
