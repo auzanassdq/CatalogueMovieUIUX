@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.sub1_cataloguemovie.BuildConfig;
 import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.model.Movie;
 
@@ -46,13 +47,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        holder.tvTitle.setText(getListMovie().get(position).getName());
-        holder.tvOverview.setText(getListMovie().get(position).getDesc());
 
-        Glide.with(context)
-                .load(getListMovie().get(position).getPhoto())
-                .apply(new RequestOptions().override(55, 55))
-                .into(holder.imgPhoto);
+        holder.tvTitle.setText(getListMovie().get(position).getTitle());
+        holder.tvOverview.setText(getListMovie().get(position).getOverview());
+
+        Glide.with(holder.imgPoster.getContext())
+                .load(BuildConfig.MOVIE_POSTER + getListMovie().get(position).getPoster())
+                .apply(new RequestOptions().override(100, 150))
+                .into(holder.imgPoster);
+
     }
 
     @Override
@@ -64,13 +67,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
 
         TextView tvTitle;
         TextView tvOverview;
-        ImageView imgPhoto;
+        ImageView imgPoster;
 
         CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
-            tvOverview = itemView.findViewById(R.id.tv_desc);
-            imgPhoto = itemView.findViewById(R.id.img_photo);
+            tvOverview = itemView.findViewById(R.id.tv_overview);
+            imgPoster = itemView.findViewById(R.id.img_poster);
         }
     }
 }
