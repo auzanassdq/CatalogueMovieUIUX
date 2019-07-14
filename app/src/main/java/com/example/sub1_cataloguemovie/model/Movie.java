@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class Movie implements Parcelable {
     @SerializedName("id")
     private int id;
-    @SerializedName("title")
+    @SerializedName(value="title", alternate={"name"})
     private String title;
     @SerializedName("poster_path")
     private String poster;
