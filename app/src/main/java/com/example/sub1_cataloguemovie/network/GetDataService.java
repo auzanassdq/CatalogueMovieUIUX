@@ -14,4 +14,8 @@ public interface GetDataService {
     @GET("discover/movie")
     Call<MovieList> getAllMovie(@Query("api_key") String apiKey,
                                 @Query("language") String lang);
+
+    @GET("discover/tv")
+    Call<MovieList> getAllTv(@Query("api_key") String apiKey,
+                                @Query("language") String lang);
 }
