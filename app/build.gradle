@@ -18,7 +18,8 @@ android {
         buildTypes.each {
             it.buildConfigField 'String', 'MOVIE_API', MOVIE_API
             it.buildConfigField 'String', 'MOVIE_URL', MOVIE_URL
-            it.buildConfigField 'String', 'MOVIE_POSTER', MOVIE_POSTER
+            it.buildConfigField 'String', 'MOVIE_W185', MOVIE_W185
+            it.buildConfigField 'String', 'MOVIE_W500', MOVIE_W500
         }
     }
 }
@@ -45,7 +46,8 @@ dependencies {
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    implementation 'net.opacapp:multiline-collapsingtoolbar:27.1.1'
 }
