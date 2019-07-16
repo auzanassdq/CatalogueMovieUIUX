@@ -53,6 +53,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
 
         holder.tvTitle.setText(getListMovie().get(position).getTitle());
         holder.tvOverview.setText(getListMovie().get(position).getOverview());
+        holder.tvReleaseDate.setText(Utils.getConvertDate(getListMovie().get(position).getDate()));
 
         Glide.with(holder.imgPoster.getContext())
                 .load(BuildConfig.MOVIE_W185 + getListMovie().get(position).getPoster())
