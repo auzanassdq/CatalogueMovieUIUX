@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class Movie implements Parcelable {
     @SerializedName("id")
     private int id;
-    @SerializedName(value="title", alternate={"name"})
+    @SerializedName(value="title", alternate="name")
     private String title;
     @SerializedName("poster_path")
     private String poster;
@@ -20,8 +20,10 @@ public class Movie implements Parcelable {
     private String backdrop;
     @SerializedName("overview")
     private String overview;
-    @SerializedName("release_date")
+    @SerializedName(value="release_date", alternate="first_air_date")
     private String date;
+    @SerializedName("vote_average")
+    private double rating;
 
     public Movie() {
     }
@@ -74,6 +76,13 @@ public class Movie implements Parcelable {
         this.date = date;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     @Override
     public int describeContents() {
@@ -88,6 +97,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.backdrop);
         dest.writeString(this.overview);
         dest.writeString(this.date);
+        dest.writeDouble(this.rating);
     }
 
     private Movie(Parcel in) {
@@ -97,6 +107,7 @@ public class Movie implements Parcelable {
         this.backdrop = in.readString();
         this.overview = in.readString();
         this.date = in.readString();
+        this.rating = in.readDouble();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
