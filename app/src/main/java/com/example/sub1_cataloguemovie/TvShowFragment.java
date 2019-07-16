@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sub1_cataloguemovie.adapter.MovieAdapter;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 public class TvShowFragment extends Fragment {
 
     private RecyclerView rvCategory;
+    private ProgressBar progressBar;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -41,7 +43,8 @@ public class TvShowFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_show, container, false);
 
-        rvCategory = view.findViewById(R.id.rv_list);
+        progressBar = view.findViewById(R.id.progress_bar);
+        showLoading(true);
         initViews(view);
         return view;
     }
@@ -61,6 +64,7 @@ public class TvShowFragment extends Fragment {
             public void onResponse(@NonNull Call<MovieList> call, @NonNull Response<MovieList> response) {
                 if (response.body() != null) {
                     generateMovieList(response.body().getResults());
+                    showLoading(false);
                 } else {
                     Toast.makeText(getContext(), "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
                 }
@@ -77,5 +81,13 @@ public class TvShowFragment extends Fragment {
         MovieAdapter adapter = new MovieAdapter(getContext());
         adapter.setListMovie(movies);
         rvCategory.setAdapter(adapter);
+    }
+
+    private void showLoading(boolean state) {
+        if (state){
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
