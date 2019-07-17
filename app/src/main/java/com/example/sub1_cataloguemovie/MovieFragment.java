@@ -1,5 +1,6 @@
 package com.example.sub1_cataloguemovie;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -43,13 +44,12 @@ public class MovieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
 
-        progressBar = view.findViewById(R.id.progress_bar);
-        showLoading(true);
         initViews(view);
         return view;
     }
 
     private void initViews(View view) {
+        progressBar = view.findViewById(R.id.progress_bar);
         rvCategory = view.findViewById(R.id.rv_list);
         rvCategory.setHasFixedSize(true);
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -57,6 +57,11 @@ public class MovieFragment extends Fragment {
     }
 
     private void loadJSON() {
+        showLoading(true);
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<MovieList> call = service.getAllMovie(BuildConfig.MOVIE_API, "en-US");
         call.enqueue(new Callback<MovieList>() {
@@ -65,6 +70,7 @@ public class MovieFragment extends Fragment {
                 if (response.body() != null) {
                     generateMovieList(response.body().getResults());
                     showLoading(false);
+                    progressDialog.dismiss();
                 } else {
                     Toast.makeText(getContext(), "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
                 }
@@ -75,6 +81,8 @@ public class MovieFragment extends Fragment {
                 Toast.makeText(getContext(), "Tidak dapat memuat data", Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     private void generateMovieList(final ArrayList<Movie> movies) {
@@ -86,6 +94,7 @@ public class MovieFragment extends Fragment {
     private void showLoading(boolean state) {
         if (state){
             progressBar.setVisibility(View.VISIBLE);
+            progressBar.setMax(100);
         } else {
             progressBar.setVisibility(View.GONE);
         }
