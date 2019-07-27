@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.sub1_cataloguemovie.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -15,6 +14,7 @@ import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 public class DetailActivity extends AppCompatActivity {
 
     final public static String EXTRA_MOVIE = "extra_movie";
+    final public static String MOVIE_STATE = "movie_state";
     private TextView tvRating, tvYear, tvDesc;
     private ImageView imgPoster, imgBackdrop;
     private CollapsingToolbarLayout colapseBar;
@@ -36,7 +36,11 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        if (savedInstanceState != null) {
+            movie = savedInstanceState.getParcelable(MOVIE_STATE);
+        } else {
+            movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        }
         setMovie();
     }
 
@@ -44,6 +48,12 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(MOVIE_STATE, movie);
     }
 
     private void setMovie() {
@@ -55,9 +65,6 @@ public class DetailActivity extends AppCompatActivity {
         tvRating.setText(String.valueOf(movie.getRating()));
         tvDesc.setText(movie.getOverview());
         setImage(movie);
-        Glide.with(this)
-                .load(movie.getPoster())
-                .into(imgPoster);
     }
 
     private void setImage(Movie movie) {
