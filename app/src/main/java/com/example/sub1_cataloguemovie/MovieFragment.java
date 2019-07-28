@@ -3,6 +3,7 @@ package com.example.sub1_cataloguemovie;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,14 +21,20 @@ import com.example.sub1_cataloguemovie.network.RetrofitClientInstance;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MovieFragment extends Fragment {
 
+    private ArrayList<Movie> movies = new ArrayList<>();
+    final public static String KEY_MOVIES = "key_movies";
     private RecyclerView rvCategory;
     private ProgressBar progressBar;
+
+    private MovieAdapter adapter;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -42,10 +49,22 @@ public class MovieFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_movie, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        adapter = new MovieAdapter(getContext());
 
         initViews(view);
-        return view;
+        if (savedInstanceState == null) {
+            loadJSON();
+        } else {
+            movies = savedInstanceState.getParcelableArrayList(KEY_MOVIES);
+            generateMovieList();
+        }
     }
 
     private void initViews(View view) {
@@ -53,7 +72,6 @@ public class MovieFragment extends Fragment {
         rvCategory = view.findViewById(R.id.rv_list);
         rvCategory.setHasFixedSize(true);
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity()));
-        loadJSON();
     }
 
     private void loadJSON() {
@@ -63,30 +81,34 @@ public class MovieFragment extends Fragment {
         progressDialog.show();
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<MovieList> call = service.getAllMovie(BuildConfig.MOVIE_API, "en-US");
-        call.enqueue(new Callback<MovieList>() {
+        Observable<MovieList> observable = service.getAllMovie(BuildConfig.MOVIE_API, "en-US");
+        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MovieList>() {
             @Override
-            public void onResponse(@NonNull Call<MovieList> call, @NonNull Response<MovieList> response) {
-                if (response.body() != null) {
-                    generateMovieList(response.body().getResults());
-                    showLoading(false);
-                    progressDialog.dismiss();
-                } else {
-                    Toast.makeText(getContext(), "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
-                }
+            public void onSubscribe(Disposable d) {
+
             }
 
             @Override
-            public void onFailure(@NonNull Call<MovieList> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Tidak dapat memuat data", Toast.LENGTH_SHORT).show();
+            public void onNext(MovieList movieList) {
+                movies = movieList.getResults();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getContext(), "Data tidak dapat dimuat", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onComplete() {
+                generateMovieList();
+                showLoading(false);
+                progressDialog.dismiss();
             }
         });
 
-
     }
 
-    private void generateMovieList(final ArrayList<Movie> movies) {
-        MovieAdapter adapter = new MovieAdapter(getContext());
+    private void generateMovieList() {
         adapter.setListMovie(movies);
         rvCategory.setAdapter(adapter);
     }
@@ -98,5 +120,11 @@ public class MovieFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList(KEY_MOVIES, movies);
+        super.onSaveInstanceState(outState);
     }
 }
