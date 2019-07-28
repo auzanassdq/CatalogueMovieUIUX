@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.sub1_cataloguemovie.BuildConfig;
 import com.example.sub1_cataloguemovie.DetailActivity;
 import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.Utils;
 import com.example.sub1_cataloguemovie.model.Movie;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,9 +54,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
         holder.tvOverview.setText(getListMovie().get(position).getOverview());
         holder.tvReleaseDate.setText(Utils.getConvertDate(getListMovie().get(position).getDate()));
 
-        Glide.with(holder.imgPoster.getContext())
+        Picasso.get()
                 .load(BuildConfig.MOVIE_W185 + getListMovie().get(position).getPoster())
-                .apply(new RequestOptions().override(100, 150))
                 .into(holder.imgPoster);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
