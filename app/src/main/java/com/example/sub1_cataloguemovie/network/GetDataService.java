@@ -2,7 +2,7 @@ package com.example.sub1_cataloguemovie.network;
 
 import com.example.sub1_cataloguemovie.model.MovieList;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -12,10 +12,10 @@ import retrofit2.http.Query;
  */
 public interface GetDataService {
     @GET("discover/movie")
-    Call<MovieList> getAllMovie(@Query("api_key") String apiKey,
-                                @Query("language") String lang);
+    Observable<MovieList> getAllMovie(@Query("api_key") String apiKey,
+                                      @Query("language") String lang);
 
     @GET("discover/tv")
-    Call<MovieList> getAllTv(@Query("api_key") String apiKey,
-                                @Query("language") String lang);
+    Observable<MovieList> getAllTv(@Query("api_key") String apiKey,
+                                   @Query("language") String lang);
 }
