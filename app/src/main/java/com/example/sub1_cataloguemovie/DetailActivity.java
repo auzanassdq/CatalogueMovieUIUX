@@ -34,12 +34,8 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (savedInstanceState != null) {
-            movie = savedInstanceState.getParcelable(MOVIE_STATE);
-        } else {
-            movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         setMovie();
     }
