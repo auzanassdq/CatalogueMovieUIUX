@@ -26,7 +26,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private List<Movie> srcDB;
     private ArrayList<Movie> movies;
-//    final public static String KEY_MOVIES = "key_movies";
+    final public static String KEY_MOVIES = "key_movies";
     private RecyclerView rvCategory;
     private SwipeRefreshLayout swipeRefreshLayout;
 
