@@ -1,28 +1,47 @@
 package com.example.sub1_cataloguemovie.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.reactivex.annotations.NonNull;
+
 /**
  * Created by auzan on 6/29/2019.
  * Github: @auzanassdq
  */
+@Entity
 public class Movie implements Parcelable {
     @SerializedName("id")
+    @NonNull @PrimaryKey
     private int id;
+
     @SerializedName(value="title", alternate="name")
+    @ColumnInfo(name = "title")
     private String title;
+
     @SerializedName("poster_path")
+    @ColumnInfo(name = "poster")
     private String poster;
+
     @SerializedName("backdrop_path")
+    @ColumnInfo(name = "backdrop")
     private String backdrop;
+
     @SerializedName("overview")
+    @ColumnInfo(name = "overview")
     private String overview;
+
     @SerializedName(value="release_date", alternate="first_air_date")
+    @ColumnInfo(name = "date")
     private String date;
+
     @SerializedName("vote_average")
+    @ColumnInfo(name = "rating")
     private double rating;
 
     public Movie() {
@@ -80,7 +99,7 @@ public class Movie implements Parcelable {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
