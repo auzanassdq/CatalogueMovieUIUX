@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             setFragment(new HomeFragment(), getResources().getString(R.string.app_name));
         }
-
     }
 
     @Override
