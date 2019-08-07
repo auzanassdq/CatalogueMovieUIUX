@@ -7,7 +7,6 @@ import android.arch.persistence.room.Query;
 
 import com.example.sub1_cataloguemovie.model.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
