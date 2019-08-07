@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_setting) {
             Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.action_favorite) {
+            Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
