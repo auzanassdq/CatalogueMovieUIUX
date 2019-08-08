@@ -19,6 +19,12 @@ public interface MovieDao {
     @Query("SELECT * FROM movie")
     List<Movie> getAll();
 
+    @Query("SELECT * FROM movie WHERE type = :type")
+    List<Movie> getAllMovie(String type);
+
+    @Query("SELECT * FROM movie WHERE type = :type")
+    List<Movie> getAllTvShow(String type);
+
     @Query("SELECT * FROM movie WHERE id = :id")
     Movie getMovie(int id);
 
