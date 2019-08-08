@@ -29,11 +29,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MovieFragment extends Fragment {
 
-    private ArrayList<Movie> movies = new ArrayList<>();
     final public static String KEY_MOVIES = "key_movies";
+
+    private ArrayList<Movie> movies = new ArrayList<>();
     private RecyclerView rvCategory;
     private ProgressBar progressBar;
-
     private MovieAdapter adapter;
 
     public MovieFragment() {
@@ -91,6 +91,9 @@ public class MovieFragment extends Fragment {
             @Override
             public void onNext(MovieList movieList) {
                 movies = movieList.getResults();
+                for (Movie movie : movies) {
+                    movie.setType("Movie");
+                }
             }
 
             @Override
@@ -105,7 +108,6 @@ public class MovieFragment extends Fragment {
                 progressDialog.dismiss();
             }
         });
-
     }
 
     private void generateMovieList() {
@@ -116,7 +118,6 @@ public class MovieFragment extends Fragment {
     private void showLoading(boolean state) {
         if (state){
             progressBar.setVisibility(View.VISIBLE);
-            progressBar.setMax(100);
         } else {
             progressBar.setVisibility(View.GONE);
         }

@@ -29,9 +29,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TvShowFragment extends Fragment {
 
+    final public static String KEY_MOVIES = "key_movies";
 
     private ArrayList<Movie> movies = new ArrayList<>();
-    final public static String KEY_MOVIES = "key_movies";
     private RecyclerView rvCategory;
     private ProgressBar progressBar;
     private MovieAdapter adapter;
@@ -91,6 +91,9 @@ public class TvShowFragment extends Fragment {
             @Override
             public void onNext(MovieList movieList) {
                 movies = movieList.getResults();
+                for (Movie movie : movies) {
+                    movie.setType("Tv Show");
+                }
             }
 
             @Override
