@@ -44,6 +44,9 @@ public class Movie implements Parcelable {
     @ColumnInfo(name = "rating")
     private double rating;
 
+    @ColumnInfo(name = "type")
+    private String type;
+
     public Movie() {
     }
 
@@ -103,6 +106,14 @@ public class Movie implements Parcelable {
         this.rating = rating;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -117,6 +128,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.overview);
         dest.writeString(this.date);
         dest.writeDouble(this.rating);
+        dest.writeString(this.type);
     }
 
     private Movie(Parcel in) {
@@ -127,6 +139,7 @@ public class Movie implements Parcelable {
         this.overview = in.readString();
         this.date = in.readString();
         this.rating = in.readDouble();
+        this.type = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
