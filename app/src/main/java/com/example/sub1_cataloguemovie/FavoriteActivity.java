@@ -39,5 +39,4 @@ public class FavoriteActivity extends AppCompatActivity {
         adapter.addFragment(new FavTvShowFragment(), getResources().getString(R.string.tv_shows));
         viewPager.setAdapter(adapter);
     }
-
 }
