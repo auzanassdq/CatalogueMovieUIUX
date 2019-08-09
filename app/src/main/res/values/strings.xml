@@ -10,4 +10,5 @@
     <string name="movie_backdrop">Movie Backdrop</string>
     <string name="release_date">Release Date</string>
     <string name="rating">Rating</string>
+    <string name="favorite">Favorite</string>
 </resources>
