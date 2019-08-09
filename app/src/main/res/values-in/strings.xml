@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="overview">Ikhtisar</string>
+    <string name="year">Tahun</string>
+    <string name="movies">Film</string>
+    <string name="tv_shows">Acara Tv</string>
+    <string name="poster">Poster</string>
+    <string name="setting">Pengaturan</string>
+    <string name="movie_poster">Movie poster</string>
+</resources>
