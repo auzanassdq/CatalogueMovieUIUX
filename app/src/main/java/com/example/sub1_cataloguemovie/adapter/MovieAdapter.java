@@ -1,6 +1,7 @@
 package com.example.sub1_cataloguemovie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.sub1_cataloguemovie.BuildConfig;
+import com.example.sub1_cataloguemovie.DetailActivity;
 import com.example.sub1_cataloguemovie.R;
+import com.example.sub1_cataloguemovie.Utils;
 import com.example.sub1_cataloguemovie.model.Movie;
 
 import java.util.ArrayList;
@@ -45,14 +49,27 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        holder.tvTitle.setText(getListMovie().get(position).getName());
-        holder.tvOverview.setText(getListMovie().get(position).getDesc());
+    public void onBindViewHolder(@NonNull CategoryViewHolder holder, final int position) {
 
-        Glide.with(context)
-                .load(getListMovie().get(position).getPhoto())
-                .apply(new RequestOptions().override(55, 55))
-                .into(holder.imgPhoto);
+        holder.tvTitle.setText(getListMovie().get(position).getTitle());
+        holder.tvOverview.setText(getListMovie().get(position).getOverview());
+        holder.tvReleaseDate.setText(Utils.getConvertDate(getListMovie().get(position).getDate()));
+
+        Glide.with(holder.imgPoster.getContext())
+                .load(BuildConfig.MOVIE_W185 + getListMovie().get(position).getPoster())
+                .apply(new RequestOptions().override(100, 150))
+                .into(holder.imgPoster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Movie movie = getListMovie().get(position);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -64,13 +81,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
 
         TextView tvTitle;
         TextView tvOverview;
-        ImageView imgPhoto;
+        TextView tvReleaseDate;
+        ImageView imgPoster;
 
         CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
-            tvOverview = itemView.findViewById(R.id.tv_desc);
-            imgPhoto = itemView.findViewById(R.id.img_photo);
+            tvOverview = itemView.findViewById(R.id.tv_overview);
+            tvReleaseDate = itemView.findViewById(R.id.tv_release_date);
+            imgPoster = itemView.findViewById(R.id.img_poster);
         }
     }
 }
