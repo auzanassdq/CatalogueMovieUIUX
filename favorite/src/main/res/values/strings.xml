@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Favorite</string>
+    <string name="movie_poster">Poster</string>
 </resources>
