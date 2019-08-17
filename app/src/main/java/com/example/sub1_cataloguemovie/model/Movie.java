@@ -42,7 +42,7 @@ public class Movie implements Parcelable {
 
     @SerializedName("vote_average")
     @ColumnInfo(name = "rating")
-    private double rating;
+    private String rating;
 
     @ColumnInfo(name = "type")
     private String type;
@@ -98,11 +98,11 @@ public class Movie implements Parcelable {
         this.date = date;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -127,7 +127,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.backdrop);
         dest.writeString(this.overview);
         dest.writeString(this.date);
-        dest.writeDouble(this.rating);
+        dest.writeString(this.rating);
         dest.writeString(this.type);
     }
 
@@ -138,7 +138,7 @@ public class Movie implements Parcelable {
         this.backdrop = in.readString();
         this.overview = in.readString();
         this.date = in.readString();
-        this.rating = in.readDouble();
+        this.rating = in.readString();
         this.type = in.readString();
     }
 

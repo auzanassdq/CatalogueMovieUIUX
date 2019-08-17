@@ -177,7 +177,7 @@ public class DetailActivity extends AppCompatActivity {
         String release_date = movie.getDate();
         tvYear.setText(Utils.getConvertDate(release_date));
 
-        tvRating.setText(String.valueOf(movie.getRating()));
+        tvRating.setText(movie.getRating());
         tvDesc.setText(movie.getOverview());
         setImage(movie);
         favoriteSet();
