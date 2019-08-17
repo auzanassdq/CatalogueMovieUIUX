@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import com.example.sub1_cataloguemovie.model.Movie;
 
@@ -33,4 +34,22 @@ public interface MovieDao {
 
     @Delete
     void deleteMovie(Movie... movies);
+
+    @Query("SELECT * FROM movie")
+    Cursor selectAllProvider();
+
+    @Query("SELECT * FROM movie WHERE id = :id")
+    Cursor selectByIdProvider(long id);
+
+    @Query("SELECT * FROM movie WHERE type = :type")
+    Cursor selectAllTvShowProvider(String type);
+
+    @Query("SELECT * FROM movie WHERE type = :type")
+    Cursor selectAllMovieProvider(String type);
+
+    @Insert
+    long insertProvider(Movie... movie);
+
+    @Delete
+    int deleteProvider(long id);
 }

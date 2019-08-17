@@ -3,12 +3,18 @@ package com.example.sub1_cataloguemovie.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
 import io.reactivex.annotations.NonNull;
+
+import static android.os.Build.VERSION.RELEASE;
+import static android.provider.BaseColumns._ID;
+import static com.example.sub1_cataloguemovie.db.DatabaseClient.getColumnInt;
+import static com.example.sub1_cataloguemovie.db.DatabaseClient.getColumnString;
 
 /**
  * Created by auzan on 6/29/2019.
@@ -140,6 +146,17 @@ public class Movie implements Parcelable {
         this.date = in.readString();
         this.rating = in.readString();
         this.type = in.readString();
+    }
+
+    public Movie (Cursor cursor) {
+        this.id = getColumnInt(cursor, "id");
+        this.title = getColumnString(cursor, "title");
+        this.poster = getColumnString(cursor, "poster");
+        this.backdrop = getColumnString(cursor, "backdrop");
+        this.overview = getColumnString(cursor, "overview");
+        this.date = getColumnString(cursor, "date");
+        this.rating = getColumnString(cursor, "rating");
+        this.type = getColumnString(cursor, "type");
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
