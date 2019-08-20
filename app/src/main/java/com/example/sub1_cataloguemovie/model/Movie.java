@@ -3,6 +3,7 @@ package com.example.sub1_cataloguemovie.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -157,6 +158,25 @@ public class Movie implements Parcelable {
         this.date = getColumnString(cursor, "date");
         this.rating = getColumnString(cursor, "rating");
         this.type = getColumnString(cursor, "type");
+    }
+
+    public static Movie fromContentValues(ContentValues values) {
+        final Movie movie = new Movie();
+        movie.id = values.getAsInteger("id");
+        movie.title = values.getAsString("title");
+        movie.poster = values.getAsString("poster");
+        movie.backdrop = values.getAsString("backdrop");
+        movie.overview = values.getAsString("overview");
+        movie.date = values.getAsString("date");
+        movie.rating = values.getAsString("rating");
+        movie.type = values.getAsString("type");
+//        if (values.containsKey("id")) {
+//            movie.id = values.getAsInteger("id");
+//        }
+//        if (values.containsKey("title")) {
+//            movie.title = values.getAsString("title");
+//        }
+        return movie;
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {

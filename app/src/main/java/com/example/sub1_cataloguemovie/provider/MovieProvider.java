@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 
 import com.example.sub1_cataloguemovie.db.DatabaseClient;
 import com.example.sub1_cataloguemovie.db.MovieDao;
+import com.example.sub1_cataloguemovie.model.Movie;
 
 import static android.service.notification.Condition.SCHEME;
 
@@ -82,7 +83,7 @@ public class MovieProvider extends ContentProvider {
         long added;
         switch (sUriMatcher.match(uri)){
             case MOVIE:
-                added = DatabaseClient.getInstance(getContext()).getAppDatabase().movieDao().insertProvider();
+                added = DatabaseClient.getInstance(getContext()).getAppDatabase().movieDao().insertProvider(Movie.fromContentValues(contentValues));
                 break;
             default:
                 added = 0;
