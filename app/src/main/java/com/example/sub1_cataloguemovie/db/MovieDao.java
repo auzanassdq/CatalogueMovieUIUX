@@ -36,6 +36,7 @@ public interface MovieDao {
     @Delete
     void deleteMovie(Movie... movies);
 
+//    Provider
     @Query("SELECT * FROM movie")
     Cursor selectAllProvider();
 
@@ -51,6 +52,6 @@ public interface MovieDao {
     @Insert
     long insertProvider(Movie movie);
 
-    @Delete
+    @Query("DELETE FROM movie WHERE id = :id")
     int deleteProvider(long id);
 }
