@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="overview">Ikhtisar</string>
+    <string name="movies">Film</string>
+    <string name="tv_shows">Acara Tv</string>
+    <string name="poster">Poster</string>
+    <string name="setting">Pengaturan</string>
+    <string name="movie_poster">Poster Film</string>
+    <string name="title">Judul</string>
+    <string name="movie_backdrop">Backdrop Film</string>
+    <string name="release_date">Tanggal Riril</string>
+    <string name="rating">Penilaian</string>
+    <string name="favorite">Favorit</string>
+    <string name="search">Cari</string>
+</resources>
