@@ -12,4 +12,15 @@
     <string name="rating">Penilaian</string>
     <string name="favorite">Favorit</string>
     <string name="search">Cari</string>
+
+    <string name="key_reminder_upcoming">reminder_upcoming</string>
+    <string name="daily_reminder_title">Pengingat Notifikasi Harian</string>
+    <string name="daily_reminder_summary">Ubah on/off pengingat harian</string>
+    <string name="upcoming_reminder_title">Pengingat Notifikasi Mendatang</string>
+    <string name="upcoming_reminder_summary">Ubah on/off pengingat mendatang</string>
+    <string name="notification">Notifikasi</string>
+    <string name="key_setting_locale">setting_locale</string>
+    <string name="setting_locale_title">Pengaturan lokal</string>
+    <string name="setting_locale_summary">Ubah lokalisasi ponsel mu</string>
+    <string name="key_reminder_daily">reminder_daily</string>
 </resources>

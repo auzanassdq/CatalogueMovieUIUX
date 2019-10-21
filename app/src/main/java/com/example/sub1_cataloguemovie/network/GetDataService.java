@@ -18,4 +18,10 @@ public interface GetDataService {
     @GET("discover/tv")
     Observable<MovieList> getAllTv(@Query("api_key") String apiKey,
                                    @Query("language") String lang);
+
+    @GET("discover/movie")
+    Observable<MovieList> getMovieRelease(@Query("api_key") String apiKey,
+                                          @Query("primary_release_date.gte") String gteDate,
+                                          @Query("primary_release_date.lte") String lteDate);
+
 }

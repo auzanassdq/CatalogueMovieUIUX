@@ -1,4 +1,4 @@
-package com.example.sub1_cataloguemovie;
+package com.example.sub1_cataloguemovie.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sub1_cataloguemovie.BuildConfig;
+import com.example.sub1_cataloguemovie.R;
+import com.example.sub1_cataloguemovie.Utils;
 import com.example.sub1_cataloguemovie.db.DatabaseClient;
 import com.example.sub1_cataloguemovie.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -86,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase().movieDao().deleteMovie(movie);
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase().movieDao().deleteProvider(movie.getId());
             }
 
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
@@ -111,7 +114,7 @@ public class DetailActivity extends AppCompatActivity {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase().movieDao().insertMoive(movie);
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase().movieDao().insertProvider(movie);
             }
 
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
