@@ -1,4 +1,4 @@
-package com.example.sub1_cataloguemovie;
+package com.example.sub1_cataloguemovie.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.adapter.MovieAdapter;
 import com.example.sub1_cataloguemovie.db.DatabaseClient;
 import com.example.sub1_cataloguemovie.model.Movie;
@@ -29,14 +30,14 @@ import io.reactivex.schedulers.Schedulers;
  * Created by auzan on 8/8/2019.
  * Github: @auzanassdq
  */
-public class FavMovieFragment extends Fragment {
+public class FavTvShowFragment extends Fragment {
 
     private List<Movie> srcDB;
     private ArrayList<Movie> movies;
     final public static String KEY_MOVIES = "key_movies";
     private RecyclerView rvCategory;
 
-    public FavMovieFragment() {
+    public FavTvShowFragment() {
 
     }
 
@@ -49,7 +50,7 @@ public class FavMovieFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_tv_show, container, false);
     }
 
     @Override
@@ -76,7 +77,7 @@ public class FavMovieFragment extends Fragment {
         Completable.fromAction(new Action() {
             @Override
             public void run() {
-                srcDB = DatabaseClient.getInstance(getContext()).getAppDatabase().movieDao().getAllMovie("Movie");
+                srcDB = DatabaseClient.getInstance(getContext()).getAppDatabase().movieDao().getAllTvShow("Tv Show");
                 movies = new ArrayList<>(srcDB);
                 generateMovieList(movies);
             }

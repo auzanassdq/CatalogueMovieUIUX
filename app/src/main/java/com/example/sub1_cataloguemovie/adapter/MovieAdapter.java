@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sub1_cataloguemovie.BuildConfig;
-import com.example.sub1_cataloguemovie.DetailActivity;
+import com.example.sub1_cataloguemovie.activity.DetailActivity;
 import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.Utils;
 import com.example.sub1_cataloguemovie.model.Movie;

@@ -1,4 +1,4 @@
-package com.example.sub1_cataloguemovie;
+package com.example.sub1_cataloguemovie.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sub1_cataloguemovie.fragment.MovieFragment;
+import com.example.sub1_cataloguemovie.R;
+import com.example.sub1_cataloguemovie.fragment.TvShowFragment;
 import com.example.sub1_cataloguemovie.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_setting) {
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+//            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.action_favorite) {
             Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);

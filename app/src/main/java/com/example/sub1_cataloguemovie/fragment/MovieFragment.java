@@ -1,4 +1,4 @@
-package com.example.sub1_cataloguemovie;
+package com.example.sub1_cataloguemovie.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.sub1_cataloguemovie.BuildConfig;
+import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.adapter.MovieAdapter;
 import com.example.sub1_cataloguemovie.model.Movie;
 import com.example.sub1_cataloguemovie.model.MovieList;

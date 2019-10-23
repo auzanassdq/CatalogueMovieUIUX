@@ -1,4 +1,4 @@
-package com.example.sub1_cataloguemovie;
+package com.example.sub1_cataloguemovie.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -6,6 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.sub1_cataloguemovie.fragment.FavMovieFragment;
+import com.example.sub1_cataloguemovie.fragment.FavTvShowFragment;
+import com.example.sub1_cataloguemovie.R;
 import com.example.sub1_cataloguemovie.adapter.ViewPagerAdapter;
 
 public class FavoriteActivity extends AppCompatActivity {
